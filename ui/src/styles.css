@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    /* Defining main colors that will be used for styling the application */
+    --primary-color: #F72D57;
+    --accent-color: #57babb;
+}
