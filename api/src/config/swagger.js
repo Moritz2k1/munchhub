@@ -1,8 +1,5 @@
-const express = require("express");
-const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
 
-const app = express();
 const port = 3000;
 
 // Setting up Swagger
@@ -29,7 +26,7 @@ const swaggerOptions = {
       },
     },
   },
-  apis: ["./routes/restaurant-owner/*.js"],
+  apis: ["./src/routes/**/*.js"],
 };
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
