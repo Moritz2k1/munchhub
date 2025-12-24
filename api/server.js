@@ -21,6 +21,6 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/restaurants", restaurantRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`Swagger Docs available on: http://localhost:${PORT}/api-docs`);
+    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Swagger Docs available on: http://localhost:${PORT}/api-docs`);
 });
