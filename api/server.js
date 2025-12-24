@@ -6,10 +6,15 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocs = require("./src/config/swagger");
+const swaggerDocs = require("./src/config/swagger/swagger");
 
 // Define Routes here
+// Restaurant Owner
 const restaurantRoutes = require("./src/routes/restaurant-owner/restaurants");
+// const menuRoutes = require("./src/routes/restaurant-owner/menus");
+// const dishRoutes = require("./src/routes/restaurant-owner/dishes");
+// const orderRoutes = require("./src/routes/restaurant-owner/orders");
+// const orderItemRoutes = require("./src/routes/restaurant-owner/orderitems");
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +24,10 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Use Routes here
 app.use("/api/restaurants", restaurantRoutes);
+// app.use("/api/menus", restaurantRoutes);
+// app.use("/api/dishes", restaurantRoutes);
+// app.use("/api/orders", restaurantRoutes);
+// app.use("/api/orderitems", restaurantRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
