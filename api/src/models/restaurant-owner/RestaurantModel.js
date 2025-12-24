@@ -55,12 +55,12 @@ const Restaurant = sequelize.define(
         },
 
         restaurant_opening_hour: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.TIME,
             allowNull: false,
         },
 
         restaurant_closing_hour: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.TIME,
             allowNull: false,
         },
     },

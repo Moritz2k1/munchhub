@@ -17,7 +17,7 @@ const Menu = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "restaurant",
+                model: "Restaurants",
                 key: "restaurant_id",
             },
             onUpdate: "CASCADE",
@@ -35,17 +35,17 @@ const Menu = sequelize.define(
         },
 
         menu_start_time: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.TIME,
             allowNull: false,
         },
 
         menu_end_time: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.TIME,
             allowNull: false,
         },
     },
     {
-        tableName: "Menu",
+        tableName: "Menus",
         timestamps: true,
         underscored: true,
     }

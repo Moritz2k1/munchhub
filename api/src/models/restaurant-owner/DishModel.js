@@ -17,8 +17,8 @@ const Dish = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "menu",
-                key: "menu_id,",
+                model: "Menus",
+                key: "menu_id",
             },
             onUpdate: "CASCADE",
             onDelete: "CASCADE",
@@ -45,12 +45,12 @@ const Dish = sequelize.define(
         },
 
         dish_price: {
-            type: DataTypes.STRING,
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
         },
     },
     {
-        tableName: "Dish",
+        tableName: "Dishes",
         timestamps: true,
         underscored: true,
     }

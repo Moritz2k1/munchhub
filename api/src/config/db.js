@@ -5,7 +5,7 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: "postgres",
 });
 
-async () => {
+(async () => {
     try {
         await sequelize.authenticate();
         console.log("Connection has been established successfully.");
@@ -15,6 +15,6 @@ async () => {
     } catch (error) {
         console.error("Unable to connect to the database:", error);
     }
-};
+})();
 
 module.exports = sequelize;

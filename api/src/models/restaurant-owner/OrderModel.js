@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../../config/db");
 
 const Order = sequelize.define(
-    "Dish",
+    "Order",
     {
         // Primary Key
         order_id: {
@@ -17,7 +17,7 @@ const Order = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "restaurant",
+                model: "Restaurants",
                 key: "restaurant_id",
             },
             onUpdate: "CASCADE",
@@ -25,16 +25,16 @@ const Order = sequelize.define(
         },
 
         // Foreign Key
-        customer_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: "customer",
-                key: "customer_id",
-            },
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE",
-        },
+        // customer_id: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        //     references: {
+        //         model: "customer",
+        //         key: "customer_id",
+        //     },
+        //     onUpdate: "CASCADE",
+        //     onDelete: "CASCADE",
+        // },
 
         order_status: {
             type: DataTypes.STRING,
@@ -42,7 +42,7 @@ const Order = sequelize.define(
         },
 
         order_total_price: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
         },
 
@@ -52,7 +52,7 @@ const Order = sequelize.define(
         },
     },
     {
-        tableName: "Order",
+        tableName: "Orders",
         timestamps: true,
         underscored: true,
     }

@@ -22,9 +22,11 @@ const Restaurant = require("../../models/restaurant-owner/RestaurantModel");
  *         restaurant_city:
  *           type: string
  *         restaurant_opening_hour:
- *           type: integer
+ *           type: string
+ *           format: time
  *         restaurant_closing_hour:
- *           type: integer
+ *           type: string
+ *           format: time
  */
 
 /**
@@ -53,14 +55,43 @@ const Restaurant = require("../../models/restaurant-owner/RestaurantModel");
  *         description: Server error
  */
 
-router.post("/restaurants", async (req, res) => {
-  try {
-    const newRestaurant = await Restaurant.create(req.body);
-    res.status(201).json(newRestaurant);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: err.message });
-  }
+router.post("/", async (req, res) => {
+    try {
+        const newRestaurant = await Restaurant.create(req.body);
+        res.status(201).json(newRestaurant);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+/**
+ * @swagger
+ * /api/restaurants:
+ *  get:
+ *    summary: Get all restaurants
+ *    tags: [Restaurants]
+ *    responses:
+ *       201:
+ *         description: List of all restaurants
+ *         content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/Restaurant'
+ *       500:
+ *         description: Server error
+ */
+
+router.get("/", async (req, res) => {
+    try {
+        const restaurants = await Restaurant.findAll();
+        res.status(200).json(restaurants);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+    }
 });
 
 module.exports = router;

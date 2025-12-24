@@ -17,7 +17,7 @@ const OrderItem = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "order",
+                model: "Orders",
                 key: "order_id",
             },
             onUpdate: "CASCADE",
@@ -29,7 +29,7 @@ const OrderItem = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "dish",
+                model: "Dishes",
                 key: "dish_id",
             },
             onUpdate: "CASCADE",
@@ -42,12 +42,12 @@ const OrderItem = sequelize.define(
         },
 
         order_item_subtotal: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
         },
     },
     {
-        tableName: "OrderItem",
+        tableName: "OrderItems",
         timestamps: true,
         underscored: true,
     }
