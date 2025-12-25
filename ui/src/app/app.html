@@ -1,55 +1,47 @@
-<main class="landing">
-  <div class="card">
-    <img src="/assets/icons/munchhub_logo.svg" alt="Munchhub logo" class="logo" />
-    <p class="eyebrow">welcome on Munchhub</p>
-    <p class="message">
-      WOHAAA hold up - the oven is still cold. Please wait a lil bit longer while we are cooking this page.
-    </p>
-  </div>
-</main>
+<div class="landing-page">
+  <header class="top-nav" [class.menu-open]="navOpen()">
+    <div class="logo">
+      <a href="#"><img src="/assets/icons/munchhub_logo.svg" alt="Munchhub logo" /></a>
+    </div>
+    <nav class="nav-links" [class.open]="navOpen()">
+      <a href="#" aria-current="page" (click)="closeNav()">Home</a>
+      <a href="#" (click)="closeNav()">About</a>
+      <a href="#" (click)="closeNav()">Contact us</a>
+      <button type="button" class="login-btn mobile" (click)="closeNav()">Login</button>
+    </nav>
+    <button type="button" class="login-btn desktop" routerLink="/login">Login</button>
+    <button
+      type="button"
+      class="menu-toggle"
+      aria-label="Navigation umschalten"
+      [attr.aria-expanded]="navOpen()"
+      (click)="toggleNav()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+  <div class="nav-backdrop" [class.visible]="navOpen()" (click)="closeNav()"></div>
 
-<style>
-  :host {
-    display: block;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #ff5f6d 0%, #ffc371 100%);
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    color: #111;
-  }
+  <main class="hero-section">
+    <div class="zigzag-row" aria-hidden="true">
+   <img id="zigzag-op" src="/assets/images/foodpics/zigzag.svg"alt="zikzakfood" />
+    </div>
 
-  .landing {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-  }
+    <div class="hero-inner">
+      <section class="hero-copy">
+        <p class="eyebrow">Essen. Bestellt. Geliefert.</p>
+        <h1>Einfach gutes Essen.</h1>
+        <p class="subline">Bestelle bei ausgewählten Restaurants in deiner Nähe - präzise, effizient und ohne Umwege.</p>
+        <button type="button" class="cta">Jetzt loslegen</button>
+      </section>
 
-  .card {
-    text-align: center;
-    background: #fff;
-    padding: 3rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
-    max-width: 480px;
-  }
+      <section class="hero-visual" aria-label="Pizza Platzhalter">
 
-  .logo {
-    width: 120px;
-    height: auto;
-    margin-bottom: 1.5rem;
-  }
+        <img id="pizza_landingpage" src="/assets/images/foodpics/pizza01.png" height="800px" alt="Munchhub logo" />
 
-  .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .message {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin: 0 auto;
-  }
-</style>
+      </section>
+    </div>
+  </main>
+</div>
