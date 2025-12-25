@@ -1,79 +1,47 @@
 <div class="landing-page">
-  <header class="top-nav">
+  <header class="top-nav" [class.menu-open]="navOpen()">
     <div class="logo">
-      <img src="/assets/icons/munchhub_logo.svg" alt="Munchhub logo" />
+      <a href="#"><img src="/assets/icons/munchhub_logo.svg" alt="Munchhub logo" /></a>
     </div>
-    <nav class="nav-links">
-      <a href="#" aria-current="page">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact us</a>
+    <nav class="nav-links" [class.open]="navOpen()">
+      <a href="#" aria-current="page" (click)="closeNav()">Home</a>
+      <a href="#" (click)="closeNav()">About</a>
+      <a href="#" (click)="closeNav()">Contact us</a>
+      <button type="button" class="login-btn mobile" (click)="closeNav()">Login</button>
     </nav>
-    <button type="button" class="login-btn">Login</button>
+    <button type="button" class="login-btn desktop" routerLink="/login">Login</button>
+    <button
+      type="button"
+      class="menu-toggle"
+      aria-label="Navigation umschalten"
+      [attr.aria-expanded]="navOpen()"
+      (click)="toggleNav()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
+  <div class="nav-backdrop" [class.visible]="navOpen()" (click)="closeNav()"></div>
 
-  <main class="hero">
-    <section class="hero-text">
-      <p class="eyebrow">Essen. Bestellt. Geliefert.</p>
-      <h1>Einfach gutes Essen.</h1>
-      <p class="description">
-        Wähle aus hunderten Gerichten in deiner Nähe, bestelle mit einem Klick und genieße dein Essen
-        frisch geliefert – heiß, knusprig und genau nach deinem Geschmack.
-      </p>
-      <button type="button" class="cta">Jetzt loslegen</button>
-    </section>
+  <main class="hero-section">
+    <div class="zigzag-row" aria-hidden="true">
+   <img id="zigzag-op" src="/assets/images/foodpics/zigzag.svg"alt="zikzakfood" />
+    </div>
 
-    <section class="hero-visual" aria-hidden="true">
-      <div class="food-grid">
-        <img
-          src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=320&q=80"
-          alt="Grilled salmon"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1456404823214-a69ef7a1fae5?auto=format&fit=crop&w=320&q=80"
-          alt="Roasted chicken"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1432139509613-5c4255815697?auto=format&fit=crop&w=320&q=80"
-          alt="Tacos"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1543352634-5104aee7d60b?auto=format&fit=crop&w=320&q=80"
-          alt="Burgers"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1576402187878-974f70c890a6?auto=format&fit=crop&w=320&q=80"
-          alt="Indian dishes"
-        />
-      </div>
-      <img
-        class="pizza"
-        src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=780&q=80"
-        alt="Pizza with flames"
-      />
-    </section>
+    <div class="hero-inner">
+      <section class="hero-copy">
+        <p class="eyebrow">Essen. Bestellt. Geliefert.</p>
+        <h1>Einfach gutes Essen.</h1>
+        <p class="subline">Bestelle bei ausgewählten Restaurants in deiner Nähe - präzise, effizient und ohne Umwege.</p>
+        <button type="button" class="cta">Jetzt loslegen</button>
+      </section>
 
+      <section class="hero-visual" aria-label="Pizza Platzhalter">
 
+        <img id="pizza_landingpage" src="/assets/images/foodpics/pizza01.png" height="800px" alt="Munchhub logo" />
 
-
+      </section>
+    </div>
   </main>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
-  <p>hello am bild. auch responsive ? markup now lives in ui/src/app/app.html (lines 1-53)—a header/nav plus hero grid that mirrors your mockup, including the German tagline, CTA button, and stacked food cards/pizza art. Styling moved to ui/src/app/app.css (lines 1-164), with the gradient background, elevated nav bar, overlapping food tiles, and responsive flex behavior (single-column layout under ~960 px, tightened nav on phones). The Unsplash URLs in the markup are placeholders; drop your own assets under ui/pu</p>
 </div>
