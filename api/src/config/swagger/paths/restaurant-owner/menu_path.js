@@ -1,25 +1,25 @@
 module.exports = {
-    "/api/restaurants": {
+    "api/menus": {
         post: {
-            summary: "Create a new restaurant",
-            tags: ["Restaurants"],
+            summary: "Create a new menu",
+            tags: ["Menus"],
             requestBody: {
                 required: true,
                 content: {
                     "application/json": {
                         schema: {
-                            $ref: "#/components/schemas/Restaurant",
+                            $ref: "#/components/schemas/Menu",
                         },
                     },
                 },
             },
             responses: {
                 201: {
-                    description: "Restaurant created successfully",
+                    description: "Menu created successfully",
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: "#/components/schemas/Restaurant",
+                                $ref: "#/components/schemas/Menu",
                             },
                         },
                     },
@@ -37,17 +37,17 @@ module.exports = {
             },
         },
         get: {
-            summary: "Get all restaurants",
-            tags: ["Restaurants"],
+            summary: "Get all menus",
+            tags: ["Menus"],
             responses: {
                 200: {
-                    description: "List of all restaurants",
+                    description: "List of all menus",
                     content: {
                         "application/json": {
                             schema: {
                                 type: "array",
                                 items: {
-                                    $ref: "#/components/schemas/Restaurant",
+                                    $ref: "#/components/schemas/Menu",
                                 },
                             },
                         },
@@ -66,10 +66,10 @@ module.exports = {
             },
         },
     },
-    "/api/restaurants/{id}": {
+    "api/menus/{id}": {
         get: {
-            summary: "Get a restaurant by ID",
-            tags: ["Restaurants"],
+            summary: "Get a menu by ID",
+            tags: ["Menus"],
             parameters: [
                 {
                     in: "path",
@@ -78,22 +78,22 @@ module.exports = {
                     schema: {
                         type: "integer",
                     },
-                    description: "Restaurant ID",
+                    description: "Menu ID",
                 },
             ],
             responses: {
                 200: {
-                    description: "Restaurant details",
+                    description: "Menu details",
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: "#/components/schemas/Restaurant",
+                                $ref: "#/components/schemas/Menu",
                             },
                         },
                     },
                 },
                 404: {
-                    description: "Restaurant not found",
+                    description: "Menu not found",
                     content: {
                         "application/json": {
                             schema: {
@@ -115,8 +115,8 @@ module.exports = {
             },
         },
         patch: {
-            summary: "Update a restaurant by ID",
-            tags: ["Restaurants"],
+            summary: "Update a menu by ID",
+            tags: ["Menus"],
             parameters: [
                 {
                     in: "path",
@@ -125,7 +125,7 @@ module.exports = {
                     schema: {
                         type: "integer",
                     },
-                    description: "Restaurant ID",
+                    description: "Menu ID",
                 },
             ],
             requestBody: {
@@ -133,24 +133,24 @@ module.exports = {
                 content: {
                     "application/json": {
                         schema: {
-                            $ref: "#/components/schemas/Restaurant",
+                            $ref: "#/components/schemas/Menu",
                         },
                     },
                 },
             },
             responses: {
                 200: {
-                    description: "Restaurant updated successfully",
+                    description: "Menu updated successfully",
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: "#/components/schemas/Restaurant",
+                                $ref: "#/components/schemas/Menu",
                             },
                         },
                     },
                 },
                 404: {
-                    description: "Restaurant not found",
+                    description: "Menu not found",
                     content: {
                         "application/json": {
                             schema: {
@@ -172,8 +172,8 @@ module.exports = {
             },
         },
         delete: {
-            summary: "Delete a restaurant by ID",
-            tags: ["Restaurants"],
+            summary: "Delete a menu by ID",
+            tags: ["Menus"],
             parameters: [
                 {
                     in: "path",
@@ -182,12 +182,12 @@ module.exports = {
                     schema: {
                         type: "integer",
                     },
-                    description: "Restaurant ID",
+                    description: "Menu ID",
                 },
             ],
             responses: {
                 200: {
-                    description: "Restaurant deleted successfully",
+                    description: "Menu deleted successfully",
                     content: {
                         "application/json": {
                             schema: {
@@ -202,7 +202,7 @@ module.exports = {
                     },
                 },
                 404: {
-                    description: "Restaurant not found",
+                    description: "Menu not found",
                     content: {
                         "application/json": {
                             schema: {

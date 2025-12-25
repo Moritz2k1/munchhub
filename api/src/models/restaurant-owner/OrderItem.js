@@ -5,7 +5,7 @@ const OrderItem = sequelize.define(
     "OrderItem",
     {
         //Primary Key
-        order_item: {
+        order_item_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,

@@ -1,25 +1,25 @@
 module.exports = {
-    "/api/restaurants": {
+    "api/orderitems": {
         post: {
-            summary: "Create a new restaurant",
-            tags: ["Restaurants"],
+            summary: "Create a new order item",
+            tags: ["OrderItem"],
             requestBody: {
                 required: true,
                 content: {
                     "application/json": {
                         schema: {
-                            $ref: "#/components/schemas/Restaurant",
+                            $ref: "#/components/schemas/OrderItem",
                         },
                     },
                 },
             },
             responses: {
                 201: {
-                    description: "Restaurant created successfully",
+                    description: "Order item created successfully",
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: "#/components/schemas/Restaurant",
+                                $ref: "#/components/schemas/OrderItem",
                             },
                         },
                     },
@@ -37,17 +37,17 @@ module.exports = {
             },
         },
         get: {
-            summary: "Get all restaurants",
-            tags: ["Restaurants"],
+            summary: "Get all order items",
+            tags: ["OrderItem"],
             responses: {
                 200: {
-                    description: "List of all restaurants",
+                    description: "List of all order items",
                     content: {
                         "application/json": {
                             schema: {
                                 type: "array",
                                 items: {
-                                    $ref: "#/components/schemas/Restaurant",
+                                    $ref: "#/components/schemas/OrderItem",
                                 },
                             },
                         },
@@ -66,10 +66,10 @@ module.exports = {
             },
         },
     },
-    "/api/restaurants/{id}": {
+    "api/orders/{id}": {
         get: {
-            summary: "Get a restaurant by ID",
-            tags: ["Restaurants"],
+            summary: "Get an order by ID",
+            tags: ["OrderItem"],
             parameters: [
                 {
                     in: "path",
@@ -78,22 +78,22 @@ module.exports = {
                     schema: {
                         type: "integer",
                     },
-                    description: "Restaurant ID",
+                    description: "Order item ID",
                 },
             ],
             responses: {
                 200: {
-                    description: "Restaurant details",
+                    description: "Order item details",
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: "#/components/schemas/Restaurant",
+                                $ref: "#/components/schemas/OrderItem",
                             },
                         },
                     },
                 },
                 404: {
-                    description: "Restaurant not found",
+                    description: "Order item not found",
                     content: {
                         "application/json": {
                             schema: {
@@ -115,8 +115,8 @@ module.exports = {
             },
         },
         patch: {
-            summary: "Update a restaurant by ID",
-            tags: ["Restaurants"],
+            summary: "Update an order item by ID",
+            tags: ["Orders"],
             parameters: [
                 {
                     in: "path",
@@ -125,7 +125,7 @@ module.exports = {
                     schema: {
                         type: "integer",
                     },
-                    description: "Restaurant ID",
+                    description: "Order item ID",
                 },
             ],
             requestBody: {
@@ -133,24 +133,24 @@ module.exports = {
                 content: {
                     "application/json": {
                         schema: {
-                            $ref: "#/components/schemas/Restaurant",
+                            $ref: "#/components/schemas/OrderItem",
                         },
                     },
                 },
             },
             responses: {
                 200: {
-                    description: "Restaurant updated successfully",
+                    description: "Order item updated successfully",
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: "#/components/schemas/Restaurant",
+                                $ref: "#/components/schemas/OrderItem",
                             },
                         },
                     },
                 },
                 404: {
-                    description: "Restaurant not found",
+                    description: "Order item not found",
                     content: {
                         "application/json": {
                             schema: {
@@ -172,8 +172,8 @@ module.exports = {
             },
         },
         delete: {
-            summary: "Delete a restaurant by ID",
-            tags: ["Restaurants"],
+            summary: "Delete an order item by ID",
+            tags: ["OrderItem"],
             parameters: [
                 {
                     in: "path",
@@ -182,12 +182,12 @@ module.exports = {
                     schema: {
                         type: "integer",
                     },
-                    description: "Restaurant ID",
+                    description: "Order item ID",
                 },
             ],
             responses: {
                 200: {
-                    description: "Restaurant deleted successfully",
+                    description: "Order item deleted successfully",
                     content: {
                         "application/json": {
                             schema: {
@@ -202,7 +202,7 @@ module.exports = {
                     },
                 },
                 404: {
-                    description: "Restaurant not found",
+                    description: "Order item not found",
                     content: {
                         "application/json": {
                             schema: {
