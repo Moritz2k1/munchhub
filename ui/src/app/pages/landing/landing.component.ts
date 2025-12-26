@@ -1,0 +1,21 @@
+import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-landing',
+  standalone: true,
+  imports: [RouterLink],
+  templateUrl: './landing.component.html',
+  styleUrl: './landing.component.css'
+})
+export class LandingComponent {
+  protected readonly navOpen = signal(false);
+
+  toggleNav(): void {
+    this.navOpen.update((current) => !current);
+  }
+
+  closeNav(): void {
+    this.navOpen.set(false);
+  }
+}
