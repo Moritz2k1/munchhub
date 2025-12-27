@@ -11,12 +11,13 @@ const swaggerDocs = require("./src/config/swagger/swagger");
 // Define Routes here
 // Client
 // Restaurant Owner
-const restaurantRoutes = require("./src/routes/restaurant-owner/restaurants");
-const menuRoutes = require("./src/routes/restaurant-owner/menus");
-const dishRoutes = require("./src/routes/restaurant-owner/dishes");
-const orderRoutes = require("./src/routes/restaurant-owner/orders");
-const orderItemRoutes = require("./src/routes/restaurant-owner/orderitem");
+const restaurantRoute = require("./src/routes/restaurant-owner/restaurants");
+const menuRoute = require("./src/routes/restaurant-owner/menus");
+const dishRoute = require("./src/routes/restaurant-owner/dishes");
+const orderRoute = require("./src/routes/restaurant-owner/orders");
+const orderItemRoute = require("./src/routes/restaurant-owner/orderitem");
 // Site Manager
+const userRoute = require("./src/routes/site-manager/users");
 
 app.use(cors());
 app.use(express.json());
@@ -25,11 +26,15 @@ app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Use Routes here
-app.use("/api/restaurants", restaurantRoutes);
-app.use("/api/menus", restaurantRoutes);
-app.use("/api/dishes", restaurantRoutes);
-app.use("/api/orders", restaurantRoutes);
-app.use("/api/orderitems", restaurantRoutes);
+// Client
+// Restaurant Owner
+app.use("/api/restaurants", restaurantRoute);
+app.use("/api/menus", menuRoute);
+app.use("/api/dishes", dishRoute);
+app.use("/api/orders", orderRoute);
+app.use("/api/orderitems", orderItemRoute);
+// Site Manager
+app.use("/api/users", userRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

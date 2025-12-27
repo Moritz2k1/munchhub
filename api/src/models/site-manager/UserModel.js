@@ -1,74 +1,67 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../config/db");
 
-const Restaurant = sequelize.define(
-    "Restaurant",
+const User = sequelize.define(
+    "User",
     {
         // Primary Key
-        restaurant_id: {
+        user_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
 
-        // Foreign Key
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: "Users",
-                key: "user_id",
-            },
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE",
-        },
-
-        restaurant_name: {
+        user_email: {
             type: DataTypes.STRING,
             allowNull: false,
         },
 
-        restaurant_type: {
+        user_password: {
             type: DataTypes.STRING,
             allowNull: false,
         },
 
-        restaurant_street: {
+        user_first_name: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+
+        user_last_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
 
-        restaurant_house_number: {
+        user_street: {
             type: DataTypes.STRING,
             allowNull: false,
         },
 
-        restaurant_postal_code: {
+        user_house_number: {
             type: DataTypes.STRING,
             allowNull: false,
         },
 
-        restaurant_city: {
+        user_city: {
             type: DataTypes.STRING,
             allowNull: false,
         },
 
-        restaurant_opening_hour: {
-            type: DataTypes.TIME,
+        user_postal_code: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
 
-        restaurant_closing_hour: {
-            type: DataTypes.TIME,
+        user_is_owner: {
+            type: DataTypes.BOOLEAN,
             allowNull: false,
         },
     },
     {
-        tableName: "Restaurants",
+        tableName: "Users",
         timestamps: true,
         underscored: true,
     }
 );
 
-module.exports = Restaurant;
+module.exports = User;

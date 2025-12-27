@@ -15,8 +15,8 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const OrderItems = await OrderItem.findAll();
-        res.status(200).json(OrderItems);
+        const orderItems = await OrderItem.findAll();
+        res.status(200).json(orderItems);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -25,13 +25,13 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try {
-        const OrderItem = await OrderItem.findByPk(req.params.id);
+        const orderItem = await OrderItem.findByPk(req.params.id);
 
-        if (!OrderItem) {
+        if (!orderItem) {
             return res.status(404).json({ error: "OrderItem not found" });
         }
 
-        res.status(200).json(OrderItem);
+        res.status(200).json(orderItem);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -40,14 +40,14 @@ router.get("/:id", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
     try {
-        const OrderItem = await OrderItem.findByPk(req.params.id);
+        const orderItem = await OrderItem.findByPk(req.params.id);
 
-        if (!OrderItem) {
+        if (!orderItem) {
             return res.status(404).json({ error: "OrderItem not found" });
         }
 
-        await OrderItem.update(req.body);
-        res.status(200).json(OrderItem);
+        await orderItem.update(req.body);
+        res.status(200).json(orderItem);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -56,14 +56,14 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-        const OrderItem = await OrderItem.findByPk(req.params.id);
-        if (!OrderItem) {
+        const orderItem = await OrderItem.findByPk(req.params.id);
+        if (!orderItem) {
             return res.status(404).json({ error: "OrderItem not found" });
         }
 
-        await OrderItem.destroy();
+        await orderItem.destroy();
 
-        const count = await OrderItem.count();
+        const count = await orderItem.count();
 
         if (count == 0) {
             await sequelize.query(
