@@ -146,26 +146,33 @@
         x
       </button>
     </div>
-    <div class="cart-items">
-      <article class="cart-item">
-        <img src="/assets/images/foodpics/whatever.png" alt="Doener Kebap" />
+    <div class="cart-items" *ngIf="cartItems().length; else emptyCart">
+      <article class="cart-item" *ngFor="let item of cartItems()">
+        <img [src]="item.image" [alt]="item.name" />
         <div>
-          <h4>Doener Kebap</h4>
-          <p>3.45 EUR</p>
+          <h4>{{ item.name }}</h4>
+          <p>
+            {{ formatPrice(item.price) }}
+            <span class="cart-qty">x{{ item.quantity }}</span>
+          </p>
         </div>
-      </article>
-      <article class="cart-item">
-        <img src="/assets/images/foodpics/pizza01.png" alt="Pizza Classic" />
-        <div>
-          <h4>Pizza Classic</h4>
-          <p>8.50 EUR</p>
-        </div>
+        <button
+          type="button"
+          class="cart-remove"
+          [attr.aria-label]="item.name + ' entfernen'"
+          (click)="removeFromCart(item.name)"
+        >
+          x
+        </button>
       </article>
     </div>
+    <ng-template #emptyCart>
+      <p class="cart-empty">Warenkorb ist leer.</p>
+    </ng-template>
     <div class="cart-footer">
       <div class="cart-total">
         <span>Summe</span>
-        <strong>11.95 EUR</strong>
+        <strong>{{ formatPrice(cartTotal()) }}</strong>
       </div>
       <button type="button" class="primary full">Zur Kasse</button>
     </div>

@@ -1,7 +1,8 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 type Category = {
   label: string;
@@ -11,6 +12,7 @@ type Category = {
 type MenuItem = {
   name: string;
   price: string;
+  priceValue: number;
   description: string;
   image: string;
 };
@@ -19,12 +21,6 @@ type MenuSection = {
   title: string;
   subtitle: string;
   items: MenuItem[];
-};
-
-type CartItem = {
-  name: string;
-  price: string;
-  image: string;
 };
 
 type RestaurantData = {
@@ -38,8 +34,6 @@ type RestaurantData = {
   eta: string;
   categories: Category[];
   menuSections: MenuSection[];
-  cartPreview: CartItem[];
-  cartTotal: string;
 };
 
 const DEFAULT_SLUG = 'negans-picolini';
@@ -69,24 +63,28 @@ const RESTAURANTS: Record<string, RestaurantData> = {
           {
             name: 'Smoky Burger',
             price: '12.90 EUR',
+            priceValue: 12.9,
             description: 'Doppeltes Patty, Cheddar und rauchige Sauce.',
             image: '/assets/images/foodpics/burger01.png'
           },
           {
             name: 'Portal Melt',
             price: '10.50 EUR',
+            priceValue: 10.5,
             description: 'Grilled Cheese mit karamellisierten Zwiebeln.',
             image: '/assets/images/foodpics/whateverinbrown.png'
           },
           {
             name: 'Veggie Byte',
             price: '9.20 EUR',
+            priceValue: 9.2,
             description: 'Gemuesebratling, Avocado und Kraeuter.',
             image: '/assets/images/foodpics/whatever.png'
           },
           {
             name: 'Lab Fries',
             price: '4.10 EUR',
+            priceValue: 4.1,
             description: 'Pommes mit Paprika Dust und Dip.',
             image: '/assets/images/foodpics/pomm.png'
           }
@@ -99,43 +97,34 @@ const RESTAURANTS: Record<string, RestaurantData> = {
           {
             name: 'Upside Down Shake',
             price: '5.80 EUR',
+            priceValue: 5.8,
             description: 'Vanille, Karamell und Crunch.',
             image: '/assets/images/foodpics/milkshake.png'
           },
           {
             name: 'Dark Portal Cake',
             price: '6.40 EUR',
+            priceValue: 6.4,
             description: 'Schokoladig, weich und leicht salzig.',
             image: '/assets/images/foodpics/whateverthisshitis.png'
           },
           {
             name: 'Energy Cookies',
             price: '3.20 EUR',
+            priceValue: 3.2,
             description: 'Hafer, Nuss und dunkle Schokolade.',
             image: '/assets/images/foodpics/whateverinbrown.png'
           },
           {
             name: 'Mini Waffles',
             price: '4.90 EUR',
+            priceValue: 4.9,
             description: 'Mit Beeren und Vanillesauce.',
             image: '/assets/images/foodpics/pizza01.png'
           }
         ]
       }
-    ],
-    cartPreview: [
-      {
-        name: 'Smoky Burger',
-        price: '12.90 EUR',
-        image: '/assets/images/foodpics/burger01.png'
-      },
-      {
-        name: 'Upside Down Shake',
-        price: '5.80 EUR',
-        image: '/assets/images/foodpics/milkshake.png'
-      }
-    ],
-    cartTotal: '18.70 EUR'
+    ]
   },
   'negans-picolini': {
     slug: 'negans-picolini',
@@ -161,24 +150,28 @@ const RESTAURANTS: Record<string, RestaurantData> = {
           {
             name: 'Doener Kebap',
             price: 'ab 3.45 EUR',
+            priceValue: 3.45,
             description: 'Frisches Fladenbrot, bunte Salate und hausgemachte Sauce.',
             image: '/assets/images/foodpics/whatever.png'
           },
           {
             name: 'Falafel Wrap',
             price: 'ab 4.20 EUR',
+            priceValue: 4.2,
             description: 'Knusprige Falafel, Sesamsauce und frisches Gemuese.',
             image: '/assets/images/foodpics/whateverinbrown.png'
           },
           {
             name: 'Veggie Bowl',
             price: 'ab 5.10 EUR',
+            priceValue: 5.1,
             description: 'Bunte Bowl mit Reis, Avocado und Limetten-Dressing.',
             image: '/assets/images/foodpics/milkshake.png'
           },
           {
             name: 'Ofengemuese',
             price: 'ab 3.90 EUR',
+            priceValue: 3.9,
             description: 'Gemuese aus dem Ofen mit Kraeuterquark und Sesam.',
             image: '/assets/images/foodpics/pomm.png'
           }
@@ -191,43 +184,34 @@ const RESTAURANTS: Record<string, RestaurantData> = {
           {
             name: 'Kebap Teller',
             price: 'ab 7.20 EUR',
+            priceValue: 7.2,
             description: 'Doenerfleisch, Pommes, Salat und Joghurtsauce.',
             image: '/assets/images/foodpics/burger01.png'
           },
           {
             name: 'Grill Mix',
             price: 'ab 9.80 EUR',
+            priceValue: 9.8,
             description: 'Gemischter Grillteller mit Reis und hausgemachter Sauce.',
             image: '/assets/images/foodpics/whateverthisshitis.png'
           },
           {
             name: 'Pizza Classic',
             price: 'ab 8.50 EUR',
+            priceValue: 8.5,
             description: 'Tomatensauce, Mozzarella und frisches Basilikum.',
             image: '/assets/images/foodpics/pizza01.png'
           },
           {
             name: 'Hausburger',
             price: 'ab 6.90 EUR',
+            priceValue: 6.9,
             description: 'Saftiger Burger mit Cheddar und hausgemachten Saucen.',
             image: '/assets/images/foodpics/whateverinbrown.png'
           }
         ]
       }
-    ],
-    cartPreview: [
-      {
-        name: 'Doener Kebap',
-        price: '3.45 EUR',
-        image: '/assets/images/foodpics/whatever.png'
-      },
-      {
-        name: 'Pizza Classic',
-        price: '8.50 EUR',
-        image: '/assets/images/foodpics/pizza01.png'
-      }
-    ],
-    cartTotal: '11.95 EUR'
+    ]
   },
   'the-rocks': {
     slug: 'the-rocks',
@@ -253,24 +237,28 @@ const RESTAURANTS: Record<string, RestaurantData> = {
           {
             name: 'BBQ Ribs',
             price: '13.80 EUR',
+            priceValue: 13.8,
             description: 'Ribs mit Haus-BBQ und Kraut.',
             image: '/assets/images/foodpics/whateverthisshitis.png'
           },
           {
             name: 'Rock Burger',
             price: '11.20 EUR',
+            priceValue: 11.2,
             description: 'Rind, Cheddar und knusprige Zwiebeln.',
             image: '/assets/images/foodpics/burger01.png'
           },
           {
             name: 'Spicy Wings',
             price: '8.40 EUR',
+            priceValue: 8.4,
             description: 'Scharf glasiert mit Limette.',
             image: '/assets/images/foodpics/whatever.png'
           },
           {
             name: 'Steak Plate',
             price: '15.60 EUR',
+            priceValue: 15.6,
             description: 'Medium Steak mit Ofenkartoffel.',
             image: '/assets/images/foodpics/whateverinbrown.png'
           }
@@ -283,50 +271,41 @@ const RESTAURANTS: Record<string, RestaurantData> = {
           {
             name: 'Loaded Fries',
             price: '5.20 EUR',
+            priceValue: 5.2,
             description: 'Pommes mit Cheddar und Jalapenos.',
             image: '/assets/images/foodpics/pomm.png'
           },
           {
             name: 'Grill Mais',
             price: '4.00 EUR',
+            priceValue: 4.0,
             description: 'Maiskolben mit Chili Butter.',
             image: '/assets/images/foodpics/pizza01.png'
           },
           {
             name: 'Coleslaw',
             price: '3.60 EUR',
+            priceValue: 3.6,
             description: 'Krautsalat mit Limette.',
             image: '/assets/images/foodpics/whatever.png'
           },
           {
             name: 'Haus Dip Box',
             price: '2.80 EUR',
+            priceValue: 2.8,
             description: 'Drei Saucen fuer alles.',
             image: '/assets/images/foodpics/whateverthisshitis.png'
           }
         ]
       }
-    ],
-    cartPreview: [
-      {
-        name: 'Rock Burger',
-        price: '11.20 EUR',
-        image: '/assets/images/foodpics/burger01.png'
-      },
-      {
-        name: 'Loaded Fries',
-        price: '5.20 EUR',
-        image: '/assets/images/foodpics/pomm.png'
-      }
-    ],
-    cartTotal: '16.40 EUR'
+    ]
   }
 };
 
 @Component({
   selector: 'app-restaurant',
   standalone: true,
-  imports: [RouterLink, NgFor],
+  imports: [RouterLink, NgFor, NgIf],
   templateUrl: './restaurant.component.html',
   styleUrl: './restaurant.component.css'
 })
@@ -336,6 +315,9 @@ export class RestaurantComponent {
 
   private route = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
+  private cartService = inject(CartService);
+  protected cartItems = this.cartService.items;
+  protected cartTotal = this.cartService.total;
 
   constructor() {
     this.route.paramMap
@@ -348,5 +330,28 @@ export class RestaurantComponent {
 
   toggleCart(): void {
     this.cartOpen = !this.cartOpen;
+  }
+
+  addToCart(item: MenuItem, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.cartService.addItem({
+      name: item.name,
+      price: item.priceValue,
+      image: item.image
+    });
+    this.cartOpen = true;
+  }
+
+  removeFromCart(name: string, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.cartService.removeItem(name);
+  }
+
+  formatPrice(value: number): string {
+    return this.cartService.formatPrice(value);
   }
 }

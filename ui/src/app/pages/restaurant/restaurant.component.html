@@ -70,7 +70,7 @@
         <button type="button" class="ghost">Alles anzeigen</button>
       </div>
       <div class="menu-grid">
-        <article class="menu-card" *ngFor="let item of section.items">
+        <article class="menu-card" *ngFor="let item of section.items" (click)="addToCart(item)">
           <div>
             <h3>{{ item.name }}</h3>
             <p class="price">{{ item.price }}</p>
@@ -78,7 +78,7 @@
           </div>
           <div class="menu-media">
             <img [src]="item.image" [alt]="item.name" />
-            <button type="button" class="add-btn">+</button>
+            <button type="button" class="add-btn" (click)="addToCart(item, $event)">+</button>
           </div>
         </article>
       </div>
@@ -97,19 +97,33 @@
         x
       </button>
     </div>
-    <div class="cart-items">
-      <article class="cart-item" *ngFor="let item of restaurant.cartPreview">
+    <div class="cart-items" *ngIf="cartItems().length; else emptyCart">
+      <article class="cart-item" *ngFor="let item of cartItems()">
         <img [src]="item.image" [alt]="item.name" />
         <div>
           <h4>{{ item.name }}</h4>
-          <p>{{ item.price }}</p>
+          <p>
+            {{ formatPrice(item.price) }}
+            <span class="cart-qty">x{{ item.quantity }}</span>
+          </p>
         </div>
+        <button
+          type="button"
+          class="cart-remove"
+          [attr.aria-label]="item.name + ' entfernen'"
+          (click)="removeFromCart(item.name, $event)"
+        >
+          x
+        </button>
       </article>
     </div>
+    <ng-template #emptyCart>
+      <p class="cart-empty">Warenkorb ist leer.</p>
+    </ng-template>
     <div class="cart-footer">
       <div class="cart-total">
         <span>Summe</span>
-        <strong>{{ restaurant.cartTotal }}</strong>
+        <strong>{{ formatPrice(cartTotal()) }}</strong>
       </div>
       <button type="button" class="primary full">Zur Kasse</button>
     </div>

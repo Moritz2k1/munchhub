@@ -411,7 +411,7 @@
 
 .munchhub-shell .cart-item {
   display: grid;
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: 72px 1fr auto;
   gap: 0.8rem;
   align-items: center;
   background: var(--surface);
@@ -437,6 +437,30 @@
   margin: 0;
   color: var(--accent-strong);
   font-weight: 700;
+}
+
+.munchhub-shell .cart-qty {
+  color: var(--ink-soft);
+  font-weight: 600;
+  margin-left: 0.35rem;
+}
+
+.munchhub-shell .cart-remove {
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.munchhub-shell .cart-empty {
+  margin: 2rem 0;
+  text-align: center;
+  color: var(--ink-faint);
+  font-weight: 600;
 }
 
 .munchhub-shell .cart-footer {
