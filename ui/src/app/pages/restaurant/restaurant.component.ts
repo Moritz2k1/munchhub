@@ -29,6 +29,7 @@ type RestaurantData = {
   image: string;
   cuisine: string;
   address: string;
+  coords: { x: number; y: number };
   rating: number;
   ratingCount: number;
   eta: string;
@@ -45,6 +46,7 @@ const RESTAURANTS: Record<string, RestaurantData> = {
     image: '/assets/images/strange/01.png',
     cuisine: 'Burger | Desserts | Specials',
     address: 'Labstrasse 4, 9020 Hawkins',
+    coords: { x: 2, y: 8 },
     rating: 4.8,
     ratingCount: 214,
     eta: '30-40 min',
@@ -132,6 +134,7 @@ const RESTAURANTS: Record<string, RestaurantData> = {
     image: '/assets/images/restaurants/walkingdead.png',
     cuisine: 'Burger | Doener | Pommes | Tuerkisch',
     address: 'Siemensstrasse 97, 9111 Villach',
+    coords: { x: 7, y: 3 },
     rating: 4.8,
     ratingCount: 300,
     eta: '25-35 min',
@@ -219,6 +222,7 @@ const RESTAURANTS: Record<string, RestaurantData> = {
     image: '/assets/images/restaurants/therock.png',
     cuisine: 'BBQ | Grill | Burger',
     address: 'Jungle Road 7, 1234 Tschungle',
+    coords: { x: 9, y: 7 },
     rating: 4.9,
     ratingCount: 160,
     eta: '20-30 min',
@@ -340,6 +344,10 @@ export class RestaurantComponent {
       name: item.name,
       price: item.priceValue,
       image: item.image
+    }, {
+      name: this.restaurant.name,
+      address: this.restaurant.address,
+      coords: this.restaurant.coords
     });
     this.cartOpen = true;
   }

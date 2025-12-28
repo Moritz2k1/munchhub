@@ -141,6 +141,12 @@
   box-shadow: var(--shadow);
 }
 
+.munchhub-shell .primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .munchhub-shell .primary.small {
   padding: 0.65rem 1.3rem;
   font-size: 0.95rem;

@@ -7,11 +7,18 @@ export type CartItem = {
   quantity: number;
 };
 
+export type CartSource = {
+  name: string;
+  address: string;
+  coords: { x: number; y: number };
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private readonly itemsSignal = signal<CartItem[]>([]);
+  private readonly sourceSignal = signal<CartSource | null>(null);
 
   readonly items = computed(() => this.itemsSignal());
   readonly total = computed(() =>
@@ -20,8 +27,16 @@ export class CartService {
   readonly count = computed(() =>
     this.itemsSignal().reduce((sum, item) => sum + item.quantity, 0)
   );
+  readonly source = computed(() => this.sourceSignal());
 
-  addItem(item: Omit<CartItem, 'quantity'>): void {
+  addItem(item: Omit<CartItem, 'quantity'>, source?: CartSource): void {
+    if (source) {
+      const currentSource = this.sourceSignal();
+      if (!currentSource || currentSource.name !== source.name) {
+        this.itemsSignal.set([]);
+      }
+      this.sourceSignal.set(source);
+    }
     this.itemsSignal.update((items) => {
       const existing = items.find((entry) => entry.name === item.name);
       if (existing) {
@@ -48,6 +63,9 @@ export class CartService {
       }
       return items.filter((entry) => entry.name !== name);
     });
+    if (this.itemsSignal().length === 0) {
+      this.sourceSignal.set(null);
+    }
   }
 
   formatPrice(value: number): string {

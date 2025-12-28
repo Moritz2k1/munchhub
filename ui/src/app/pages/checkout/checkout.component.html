@@ -1,0 +1,140 @@
+<section class="checkout-page munchhub-shell">
+  <header class="top-bar">
+    <a class="brand" routerLink="/">
+      <img src="/assets/icons/munchhub_logo.svg" alt="Munchhub logo" />
+    </a>
+    <nav class="nav-links">
+      <a routerLink="/dashboard">Entdecken</a>
+      <a href="#">Bestellungen</a>
+      <a href="#">Favoriten</a>
+      <a routerLink="/profile">Profil</a>
+      <a href="#">Hilfe</a>
+    </nav>
+    <div class="profile">
+      <div class="avatar">ML</div>
+      <div class="profile-meta">
+        <span class="name">Martin L.</span>
+        <span class="mail">martin@gm...</span>
+      </div>
+      <button type="button" class="ghost">
+        <img height="25px" src="/assets/icons/logout.svg" alt="logout" />
+      </button>
+    </div>
+  </header>
+
+  <main class="checkout-content">
+    <section class="checkout-summary">
+      <article class="checkout-card">
+        <div class="section-head">
+          <div>
+            <h2>Bestellung</h2>
+            <p>Ueberpruefe deine Auswahl bevor du zahlst.</p>
+          </div>
+        </div>
+        <div class="order-list" *ngIf="cartItems().length; else emptyOrder">
+          <div class="order-item" *ngFor="let item of cartItems()">
+            <img [src]="item.image" [alt]="item.name" />
+            <div>
+              <h4>{{ item.name }}</h4>
+              <p class="order-meta">
+                {{ formatPrice(item.price) }}
+                <span class="cart-qty">x{{ item.quantity }}</span>
+              </p>
+            </div>
+            <strong>{{ formatPrice(item.price * item.quantity) }}</strong>
+          </div>
+        </div>
+        <ng-template #emptyOrder>
+          <p class="cart-empty">Noch keine Artikel im Warenkorb.</p>
+        </ng-template>
+        <div class="summary-total">
+          <span>Summe</span>
+          <strong>{{ formatPrice(cartTotal()) }}</strong>
+        </div>
+        <button type="button" class="primary full" [disabled]="!cartItems().length">
+          Bestellung abschliessen
+        </button>
+      </article>
+
+      <article class="checkout-card">
+        <div class="section-head">
+          <div>
+            <h2>Zahlungsart</h2>
+            <p>Waehle die passende Bezahlung.</p>
+          </div>
+        </div>
+        <div class="payment-grid">
+          <label
+            class="payment-option"
+            *ngFor="let method of paymentMethods"
+            [class.active]="selectedPayment === method.id"
+          >
+            <input
+              type="radio"
+              name="payment"
+              [checked]="selectedPayment === method.id"
+              (change)="selectPayment(method.id)"
+            />
+            <div>
+              <h4>{{ method.label }}</h4>
+              <p>{{ method.detail }}</p>
+            </div>
+          </label>
+        </div>
+      </article>
+    </section>
+
+    <section class="checkout-side">
+      <article class="checkout-card">
+        <div class="section-head">
+          <div>
+            <h2>Lieferung</h2>
+            <p>Von Restaurant zu deiner Adresse.</p>
+          </div>
+        </div>
+        <div class="address-grid">
+          <div class="address-block">
+            <h4>Von</h4>
+            <p class="address-name">{{ cartSource()?.name ?? 'Restaurant' }}</p>
+            <p class="address-meta">{{ cartSource()?.address ?? 'Noch kein Restaurant ausgewaehlt.' }}</p>
+            <span class="coords"
+              >( {{ cartSource()?.coords?.x ?? '-' }}, {{ cartSource()?.coords?.y ?? '-' }} )</span
+            >
+          </div>
+          <div class="address-block">
+            <h4>Zu</h4>
+            <p class="address-name">{{ user.name }}</p>
+            <p class="address-meta">{{ user.address }}</p>
+            <span class="coords">( {{ user.coords.x }}, {{ user.coords.y }} )</span>
+          </div>
+        </div>
+        <div class="delivery-meta">
+          <span class="tag">Manhattan Distanz: {{ distance() ?? '-' }}</span>
+          <span class="tag soft">Lieferzeit: {{ etaMinutes() ?? '-' }} min</span>
+        </div>
+      </article>
+
+      <article class="checkout-card map-card">
+        <div class="map-head">
+          <h3>Grid Koordinaten</h3>
+          <p>Fiktive Karte fuer die Distanzberechnung.</p>
+        </div>
+        <div class="grid-map">
+          <div
+            class="grid-cell"
+            *ngFor="let cell of gridCells"
+            [class.restaurant]="isRestaurant(cell)"
+            [class.user]="isUser(cell)"
+          >
+            <span *ngIf="isRestaurant(cell)">R</span>
+            <span *ngIf="isUser(cell)">U</span>
+          </div>
+        </div>
+        <div class="map-legend">
+          <span><span class="legend-dot restaurant"></span> Restaurant</span>
+          <span><span class="legend-dot user"></span> Ziel</span>
+        </div>
+      </article>
+    </section>
+  </main>
+</section>

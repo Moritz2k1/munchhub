@@ -125,7 +125,14 @@
         <span>Summe</span>
         <strong>{{ formatPrice(cartTotal()) }}</strong>
       </div>
-      <button type="button" class="primary full">Zur Kasse</button>
+      <button
+        type="button"
+        class="primary full"
+        routerLink="/checkout"
+        [disabled]="!cartItems().length"
+      >
+        Zur Kasse
+      </button>
     </div>
   </aside>
 
