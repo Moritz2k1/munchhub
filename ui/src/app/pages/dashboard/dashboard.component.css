@@ -1,0 +1,191 @@
+:host {
+  display: block;
+}
+
+.dashboard {
+  min-height: 100vh;
+  padding: var(--page-top) var(--page-gutter) 4rem var(--page-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  transition: padding-right 0.35s ease;
+}
+
+.dashboard.cart-open {
+  padding-right: calc(var(--page-gutter) + var(--cart-width));
+}
+
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.hero-copy {
+  display: grid;
+  gap: 1.4rem;
+}
+
+
+.hero-copy h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 3.8vw, 3.3rem);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.subline {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.dashboard .ghost {
+  padding-top: 15px;
+}
+
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.chips span {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.hero-stack {
+  display: grid;
+  gap: 1.6rem;
+}
+
+.hero-card {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--stroke);
+}
+
+.dashboard .order-header {
+  margin-bottom: 1rem;
+}
+
+.eta {
+  color: var(--ink-soft);
+}
+
+.dashboard .order-body {
+  margin-bottom: 1.2rem;
+}
+
+
+.promo-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+align-content: center;
+background-size: 30%;
+   background: url("/assets/images/strange/portal.png");
+  /*background: linear-gradient(120deg, #ffeff3 0%, #ffe3ea 100%);*/
+}
+
+
+.promo-copy {
+  display: grid;
+  color: white;
+  gap: 0.7rem;
+}
+
+.promo-copy h3 {
+  margin: 0;
+
+}
+
+.promo-copy p {
+  margin: 0;
+ color: white;
+  line-height: 1.5;
+}
+
+.dashboard .rating {
+  padding: 0.2rem 0.6rem;
+}
+
+
+
+@media (max-width: 1100px) {
+  .top-bar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    border-radius: 24px;
+    text-align: center;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .profile {
+    flex-direction: column;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-panel {
+    top: 110px;
+  }
+
+  .dashboard.cart-open {
+    padding-right: var(--page-gutter);
+  }
+}
+
+@media (max-width: 720px) {
+  .dashboard {
+    padding: 1.4rem 1.2rem 3rem;
+  }
+
+  .dashboard.cart-open {
+    padding-right: 1.2rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .promo-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .promo-card img {
+    justify-self: center;
+  }
+
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +9,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  constructor(private router: Router) {}
+
   protected parallaxX = 0;
   protected parallaxY = 0;
 
@@ -30,5 +32,10 @@ export class LoginComponent {
   resetParallax(): void {
     this.parallaxX = 0;
     this.parallaxY = 0;
+  }
+
+  handleLogin(event: Event): void {
+    event.preventDefault();
+    this.router.navigate(['/dashboard']);
   }
 }
