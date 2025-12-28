@@ -1,0 +1,128 @@
+<section class="restaurant-page munchhub-shell" [class.cart-open]="cartOpen">
+  <header class="top-bar">
+    <a class="brand" routerLink="/">
+      <img src="/assets/icons/munchhub_logo.svg" alt="Munchhub logo" />
+    </a>
+    <nav class="nav-links">
+      <a routerLink="/dashboard">Entdecken</a>
+      <a href="#">Bestellungen</a>
+      <a href="#">Favoriten</a>
+      <a routerLink="/profile">Profil</a>
+      <a href="#">Hilfe</a>
+    </nav>
+    <div class="profile">
+      <div class="avatar">ML</div>
+      <div class="profile-meta">
+        <span class="name">Martin L.</span>
+        <span class="mail">martin@gm...</span>
+      </div>
+      <button type="button" class="ghost">
+        <img height="25px" src="/assets/icons/logout.svg" alt="logout" />
+      </button>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="restaurant-hero">
+      <article class="restaurant-card">
+        <img [src]="restaurant.image" [alt]="restaurant.name" />
+        <button type="button" class="primary small">Weitere Informationen</button>
+      </article>
+
+      <div class="restaurant-info">
+        <p class="eyebrow">Restaurant</p>
+        <h1>{{ restaurant.name }}</h1>
+        <p class="cuisine">{{ restaurant.cuisine }}</p>
+        <div class="detail-row">
+          <span class="address">{{ restaurant.address }}</span>
+          <span class="rating">Rating {{ restaurant.rating }} ({{ restaurant.ratingCount }})</span>
+        </div>
+        <div class="hero-actions">
+          <button type="button" class="primary">Jetzt bestellen</button>
+          <button type="button" class="ghost">Lieferzeit {{ restaurant.eta }}</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-toolbar">
+      <div class="search">
+        <input type="search" placeholder="Menu durchsuchen" />
+        <button type="button">Suchen</button>
+      </div>
+      <div class="category-tabs">
+        <button
+          *ngFor="let category of restaurant.categories; let index = index"
+          type="button"
+          class="tab"
+          [class.active]="index === 0"
+        >
+          {{ category.label }} ({{ category.count }})
+        </button>
+      </div>
+    </section>
+
+    <section class="menu-section" *ngFor="let section of restaurant.menuSections">
+      <div class="section-head">
+        <div>
+          <h2>{{ section.title }}</h2>
+          <p>{{ section.subtitle }}</p>
+        </div>
+        <button type="button" class="ghost">Alles anzeigen</button>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card" *ngFor="let item of section.items">
+          <div>
+            <h3>{{ item.name }}</h3>
+            <p class="price">{{ item.price }}</p>
+            <p class="desc">{{ item.description }}</p>
+          </div>
+          <div class="menu-media">
+            <img [src]="item.image" [alt]="item.name" />
+            <button type="button" class="add-btn">+</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <aside class="cart-panel" id="cart-panel" aria-label="Warenkorb">
+    <div class="cart-header">
+      <h2>Warenkorb</h2>
+      <button
+        type="button"
+        class="icon-btn"
+        aria-label="Warenkorb schliessen"
+        (click)="toggleCart()"
+      >
+        x
+      </button>
+    </div>
+    <div class="cart-items">
+      <article class="cart-item" *ngFor="let item of restaurant.cartPreview">
+        <img [src]="item.image" [alt]="item.name" />
+        <div>
+          <h4>{{ item.name }}</h4>
+          <p>{{ item.price }}</p>
+        </div>
+      </article>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Summe</span>
+        <strong>{{ restaurant.cartTotal }}</strong>
+      </div>
+      <button type="button" class="primary full">Zur Kasse</button>
+    </div>
+  </aside>
+
+  <div class="cart-scrim" [class.visible]="cartOpen" (click)="toggleCart()"></div>
+  <button
+    type="button"
+    class="cart-toggle"
+    aria-controls="cart-panel"
+    [attr.aria-expanded]="cartOpen"
+    (click)="toggleCart()"
+  >
+    Warenkorb
+  </button>
+</section>

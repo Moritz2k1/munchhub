@@ -1,13 +1,14 @@
-<section class="dashboard">
+<section class="dashboard munchhub-shell" [class.cart-open]="cartOpen">
   <header class="top-bar">
     <a class="brand" routerLink="/">
       <img src="/assets/icons/munchhub_logo.svg" alt="Munchhub logo" />
 
     </a>
     <nav class="nav-links">
-      <a class="active" href="#">Entdecken</a>
+      <a class="active" routerLink="/dashboard">Entdecken</a>
       <a href="#">Bestellungen</a>
       <a href="#">Favoriten</a>
+      <a routerLink="/profile">Profil</a>
       <a href="#">Hilfe</a>
     </nav>
     <div class="profile">
@@ -96,7 +97,7 @@
         <button type="button" class="ghost">Alle anzeigen</button>
       </div>
       <div class="card-grid">
-        <article class="meal-card">
+        <a class="meal-card" routerLink="/restaurant/hawking-labs">
           <img src="/assets/images/strange/01.png" alt="Burger" />
           <div class="meal-body">
             <h3>Hawking Labs</h3>
@@ -106,8 +107,8 @@
 
             <span class="rating">Rating: 4.8</span>
           </div>
-        </article>
-        <article class="meal-card">
+        </a>
+        <a class="meal-card" routerLink="/restaurant/negans-picolini">
           <img src="/assets/images/restaurants/walkingdead.png" alt="pizza" />
           <div class="meal-body">
             <h3>Negans Picolini</h3>
@@ -117,8 +118,8 @@
 
             <span class="rating">Rating: 4.7</span>
           </div>
-        </article>
-        <article class="meal-card">
+        </a>
+        <a class="meal-card" routerLink="/restaurant/the-rocks">
           <img src="/assets/images/restaurants/therock.png" alt="Chocolate dessert" />
           <div class="meal-body">
             <h3>The Rock's</h3>
@@ -128,8 +129,56 @@
             <span>ab 6,50 EUR</span>
             <span class="rating">4.9</span>
           </div>
-        </article>
+        </a>
       </div>
     </section>
   </main>
+
+  <aside class="cart-panel" id="dashboard-cart" aria-label="Warenkorb">
+    <div class="cart-header">
+      <h2>Warenkorb</h2>
+      <button
+        type="button"
+        class="icon-btn"
+        aria-label="Warenkorb schliessen"
+        (click)="toggleCart()"
+      >
+        x
+      </button>
+    </div>
+    <div class="cart-items">
+      <article class="cart-item">
+        <img src="/assets/images/foodpics/whatever.png" alt="Doener Kebap" />
+        <div>
+          <h4>Doener Kebap</h4>
+          <p>3.45 EUR</p>
+        </div>
+      </article>
+      <article class="cart-item">
+        <img src="/assets/images/foodpics/pizza01.png" alt="Pizza Classic" />
+        <div>
+          <h4>Pizza Classic</h4>
+          <p>8.50 EUR</p>
+        </div>
+      </article>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Summe</span>
+        <strong>11.95 EUR</strong>
+      </div>
+      <button type="button" class="primary full">Zur Kasse</button>
+    </div>
+  </aside>
+
+  <div class="cart-scrim" [class.visible]="cartOpen" (click)="toggleCart()"></div>
+  <button
+    type="button"
+    class="cart-toggle"
+    aria-controls="dashboard-cart"
+    [attr.aria-expanded]="cartOpen"
+    (click)="toggleCart()"
+  >
+    Warenkorb
+  </button>
 </section>

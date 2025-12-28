@@ -8,4 +8,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {}
+export class DashboardComponent {
+  protected cartOpen = true;
+
+  toggleCart(): void {
+    this.cartOpen = !this.cartOpen;
+  }
+}
