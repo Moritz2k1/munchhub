@@ -1,0 +1,162 @@
+<section class="profile-page munchhub-shell">
+  <header class="top-bar">
+    <a class="brand" routerLink="/">
+      <img src="/assets/icons/munchhub_logo.svg" alt="Munchhub logo" />
+    </a>
+    <nav class="nav-links">
+      <a routerLink="/dashboard">Entdecken</a>
+      <a href="#">Bestellungen</a>
+      <a href="#">Favoriten</a>
+      <a class="active" routerLink="/profile">Profil</a>
+      <a href="#">Hilfe</a>
+    </nav>
+    <div class="profile">
+      <div class="avatar">ML</div>
+      <div class="profile-meta">
+        <span class="name">Martin L.</span>
+        <span class="mail">martin@gm...</span>
+      </div>
+      <button type="button" class="ghost">
+        <img height="25px" src="/assets/icons/logout.svg" alt="logout" />
+      </button>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="profile-hero">
+      <article class="profile-card">
+        <div class="profile-main">
+          <div class="avatar-lg">ML</div>
+          <div class="profile-copy">
+            <p class="eyebrow">Customer</p>
+            <h1>Martin L.</h1>
+            <p class="meta">martin@gm... | +43 660 123 456</p>
+            <div class="tag-row">
+              <span class="tag">Premium</span>
+              <span class="rating">Rating 4.9</span>
+            </div>
+          </div>
+        </div>
+        <div class="profile-actions">
+          <button type="button" class="primary">Profil bearbeiten</button>
+          <button type="button" class="ghost">Einstellungen</button>
+        </div>
+      </article>
+
+      <aside class="address-card">
+        <div class="address-head">
+          <h3>Lieferadresse</h3>
+          <span class="tag soft">Standard</span>
+        </div>
+        <p>Siemensstrasse 97</p>
+        <p>9111 Villach</p>
+        <p class="meta">+43 660 123 456</p>
+        <button type="button" class="ghost small">Adresse verwalten</button>
+      </aside>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <p>Bestellungen gesamt</p>
+        <h3>128</h3>
+        <span>Letzte: gestern 19:40</span>
+      </div>
+      <div class="stat highlight">
+        <p>Guthaben</p>
+        <h3>18,40 EUR</h3>
+        <span>Kupons und Credits</span>
+      </div>
+      <div class="stat">
+        <p>Favoriten</p>
+        <h3>6 Restaurants</h3>
+        <span>Neue Empfehlungen bereit</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Deine Favoriten</h2>
+          <p>Direkt wieder bestellen.</p>
+        </div>
+        <button type="button" class="ghost">Alle anzeigen</button>
+      </div>
+      <div class="card-grid">
+        <a class="meal-card" routerLink="/restaurant/hawking-labs">
+          <img src="/assets/images/strange/01.png" alt="Hawking Labs" />
+          <div class="meal-body">
+            <h3>Hawking Labs</h3>
+            <p>Upside Down- 67-89 min</p>
+          </div>
+          <div class="meal-meta">
+            <span class="rating">Rating: 4.8</span>
+          </div>
+        </a>
+        <a class="meal-card" routerLink="/restaurant/negans-picolini">
+          <img src="/assets/images/restaurants/walkingdead.png" alt="Negans Picolini" />
+          <div class="meal-body">
+            <h3>Negans Picolini</h3>
+            <p>Alexandria- 20-30 min</p>
+          </div>
+          <div class="meal-meta">
+            <span class="rating">Rating: 4.7</span>
+          </div>
+        </a>
+        <a class="meal-card" routerLink="/restaurant/the-rocks">
+          <img src="/assets/images/restaurants/therock.png" alt="The Rock's" />
+          <div class="meal-body">
+            <h3>The Rock's</h3>
+            <p>Tschungle- 15-25 min</p>
+          </div>
+          <div class="meal-meta">
+            <span>ab 6,50 EUR</span>
+            <span class="rating">4.9</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Letzte Bestellungen</h2>
+          <p>Deine letzten Lieferungen im Ueberblick.</p>
+        </div>
+        <button type="button" class="ghost">Alle anzeigen</button>
+      </div>
+      <div class="order-grid">
+        <article class="order-card">
+          <div class="order-header">
+            <span class="tag">Geliefert</span>
+            <span class="eta">Heute, 12:40</span>
+          </div>
+          <div class="order-body">
+            <img src="/assets/images/foodpics/burger01.png" alt="Smoky Burger" />
+            <div>
+              <h3>Smoky Burger</h3>
+              <p>Hawking Labs</p>
+              <span class="price">12.90 EUR</span>
+            </div>
+          </div>
+          <button type="button" class="primary small">Nochmal bestellen</button>
+        </article>
+
+        <article class="order-card">
+          <div class="order-header">
+            <span class="tag">Geliefert</span>
+            <span class="eta">Gestern, 19:10</span>
+          </div>
+          <div class="order-body">
+            <img src="/assets/images/foodpics/pizza01.png" alt="Pizza Classic" />
+            <div>
+              <h3>Pizza Classic</h3>
+              <p>Negans Picolini</p>
+              <span class="price">8.50 EUR</span>
+            </div>
+          </div>
+          <button type="button" class="primary small">Nochmal bestellen</button>
+        </article>
+      </div>
+    </section>
+  </main>
+</section>
