@@ -15,8 +15,8 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const Orders = await Order.findAll();
-        res.status(200).json(Orders);
+        const orders = await Order.findAll();
+        res.status(200).json(orders);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -25,13 +25,13 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try {
-        const Order = await Order.findByPk(req.params.id);
+        const order = await Order.findByPk(req.params.id);
 
-        if (!Order) {
+        if (!order) {
             return res.status(404).json({ error: "Order not found" });
         }
 
-        res.status(200).json(Order);
+        res.status(200).json(order);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -40,14 +40,14 @@ router.get("/:id", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
     try {
-        const Order = await Order.findByPk(req.params.id);
+        const order = await Order.findByPk(req.params.id);
 
-        if (!Order) {
+        if (!order) {
             return res.status(404).json({ error: "Order not found" });
         }
 
-        await Order.update(req.body);
-        res.status(200).json(Order);
+        await order.update(req.body);
+        res.status(200).json(order);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -56,14 +56,14 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-        const Order = await Order.findByPk(req.params.id);
-        if (!Order) {
+        const order = await Order.findByPk(req.params.id);
+        if (!order) {
             return res.status(404).json({ error: "Order not found" });
         }
 
-        await Order.destroy();
+        await order.destroy();
 
-        const count = await Order.count();
+        const count = await order.count();
 
         if (count == 0) {
             await sequelize.query(

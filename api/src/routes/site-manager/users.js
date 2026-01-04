@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const Dish = require("../../models/restaurant-owner/DishModel");
+const User = require("../../models/site-manager/UserModel");
 const sequelize = require("../../config/db");
 
 router.post("/", async (req, res) => {
     try {
-        const newDish = await Dish.create(req.body);
-        res.status(201).json(newDish);
+        const newUser = await User.create(req.body);
+        res.status(201).json(newUser);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -15,8 +15,8 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const dishes = await Dish.findAll();
-        res.status(200).json(dishes);
+        const users = await User.findAll();
+        res.status(200).json(users);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -25,13 +25,13 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try {
-        const dish = await Dish.findByPk(req.params.id);
+        const user = await User.findByPk(req.params.id);
 
-        if (!dish) {
-            return res.status(404).json({ error: "Dish not found" });
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
         }
 
-        res.status(200).json(dish);
+        res.status(200).json(user);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -40,14 +40,14 @@ router.get("/:id", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
     try {
-        const dish = await Dish.findByPk(req.params.id);
+        const user = await User.findByPk(req.params.id);
 
-        if (!dish) {
-            return res.status(404).json({ error: "Dish not found" });
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
         }
 
-        await dish.update(req.body);
-        res.status(200).json(dish);
+        await user.update(req.body);
+        res.status(200).json(user);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -56,22 +56,22 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-        const dish = await Dish.findByPk(req.params.id);
-        if (!dish) {
-            return res.status(404).json({ error: "Dish not found" });
+        const user = await User.findByPk(req.params.id);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
         }
 
-        await dish.destroy();
+        await user.destroy();
 
-        const count = await Dish.count();
+        const count = await User.count();
 
         if (count == 0) {
             await sequelize.query(
-                'ALTER SEQUENCE "Dishes_dish_id_seq" RESTART WITH 1'
+                'ALTER SEQUENCE "Users_user_id_seq" RESTART WITH 1'
             );
         }
 
-        res.status(200).json({ message: "Dish deleted successfully" });
+        res.status(200).json({ message: "User deleted successfully" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });

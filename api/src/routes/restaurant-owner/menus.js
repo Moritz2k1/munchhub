@@ -15,8 +15,8 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const Menus = await Menu.findAll();
-        res.status(200).json(Menus);
+        const menus = await Menu.findAll();
+        res.status(200).json(menus);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -25,13 +25,13 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try {
-        const Menu = await Menu.findByPk(req.params.id);
+        const menu = await Menu.findByPk(req.params.id);
 
-        if (!Menu) {
+        if (!menu) {
             return res.status(404).json({ error: "Menu not found" });
         }
 
-        res.status(200).json(Menu);
+        res.status(200).json(menu);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -40,14 +40,14 @@ router.get("/:id", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
     try {
-        const Menu = await Menu.findByPk(req.params.id);
+        const menu = await Menu.findByPk(req.params.id);
 
-        if (!Menu) {
+        if (!menu) {
             return res.status(404).json({ error: "Menu not found" });
         }
 
-        await Menu.update(req.body);
-        res.status(200).json(Menu);
+        await menu.update(req.body);
+        res.status(200).json(menu);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
@@ -56,18 +56,18 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-        const Menu = await Menu.findByPk(req.params.id);
-        if (!Menu) {
+        const menu = await Menu.findByPk(req.params.id);
+        if (!menu) {
             return res.status(404).json({ error: "Menu not found" });
         }
 
-        await Menu.destroy();
+        await menu.destroy();
 
-        const count = await Menu.count();
+        const count = await menu.count();
 
         if (count == 0) {
             await sequelize.query(
-                'ALTER SEQUENCE "Menus_menu_id_seq" RESTART WITH 1'
+                'ALTER SEQUENCE "menus_menu_id_seq" RESTART WITH 1'
             );
         }
 

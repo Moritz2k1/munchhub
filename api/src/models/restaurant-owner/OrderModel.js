@@ -25,16 +25,16 @@ const Order = sequelize.define(
         },
 
         // Foreign Key
-        // customer_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        //     references: {
-        //         model: "customer",
-        //         key: "customer_id",
-        //     },
-        //     onUpdate: "CASCADE",
-        //     onDelete: "CASCADE",
-        // },
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: "Users",
+                key: "user_id",
+            },
+            onUpdate: "CASCADE",
+            onDelete: "CASCADE",
+        },
 
         order_status: {
             type: DataTypes.STRING,
